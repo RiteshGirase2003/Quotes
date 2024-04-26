@@ -6,7 +6,7 @@ let quotes = []; // Initialize an empty array to store quotes
 
 async function fetchQuotes() {
     try {
-        const response = await fetch('quotes.json');
+        const response = await fetch('./quotes.json');
         if (!response.ok) {
             throw new Error('Failed to fetch quotes');
         }
