@@ -28,7 +28,18 @@ function displayQuote() {
 
 newQuoteBtn.addEventListener('click', displayQuote);
 
-// Load quotes and display initial quote
-fetchQuotes().then(() => {
-    displayQuote();
-});
+// Load quotes using XMLHttpRequest
+let http = new XMLHttpRequest();
+
+http.open("GET", "./quotes.json", true);
+
+http.onload = function () {
+    if (http.status == 200) {
+        quotes = JSON.parse(http.responseText);
+        displayQuote(); // Display initial quote after loading
+    } else {
+        console.error('Failed to fetch quotes');
+    }
+};
+
+http.send();
