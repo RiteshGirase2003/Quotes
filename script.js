@@ -1,13 +1,8 @@
 const quoteText = document.getElementById('quoteText');
 const quoteAuthor = document.getElementById('quoteAuthor');
 const newQuoteBtn = document.getElementById('newQuoteBtn');
+let quotes =[]
 
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    } 
-  }
 
 
 let http = new XMLHttpRequest();
@@ -21,12 +16,17 @@ http.onload = function () {
 
     if (this.readyState == 4 && this.status == 200) 
     {
-        let quotes = JSON.parse(this.responseText);
+        quotes = JSON.parse(this.responseText);
         shuffleArray(quotes);
     }
 };
 
-
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    } 
+}
 
 
 function getRandomQuote() {
