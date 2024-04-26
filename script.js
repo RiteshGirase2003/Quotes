@@ -2,7 +2,7 @@ const quoteText = document.getElementById('quoteText');
 const quoteAuthor = document.getElementById('quoteAuthor');
 const newQuoteBtn = document.getElementById('newQuoteBtn');
 
-let quotes = []; 
+let quotes = []; // Initialize an empty array to store quotes
 
 async function fetchQuotes() {
     try {
