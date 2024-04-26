@@ -2,19 +2,32 @@ const quoteText = document.getElementById('quoteText');
 const quoteAuthor = document.getElementById('quoteAuthor');
 const newQuoteBtn = document.getElementById('newQuoteBtn');
 
-let quotes = []; // Initialize an empty array to store quotes
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    } 
+  }
 
-async function fetchQuotes() {
-    try {
-        const response = await fetch('./quotes.json');
-        if (!response.ok) {
-            throw new Error('Failed to fetch quotes');
-        }
-        quotes = await response.json();
-    } catch (error) {
-        console.error(error);
+
+let http = new XMLHttpRequest();
+
+http.open("get", "json.json", true);
+
+http.send();
+
+http.onload = function () {
+
+
+    if (this.readyState == 4 && this.status == 200) 
+    {
+        let quotes = JSON.parse(this.responseText);
+        shuffleArray(quotes);
     }
-}
+};
+
+
+
 
 function getRandomQuote() {
     return quotes[Math.floor(Math.random() * quotes.length)];
@@ -28,18 +41,5 @@ function displayQuote() {
 
 newQuoteBtn.addEventListener('click', displayQuote);
 
-// Load quotes using XMLHttpRequest
-let http = new XMLHttpRequest();
-
-http.open("GET", "./quotes.json", true);
-
-http.onload = function () {
-    if (http.status == 200) {
-        quotes = JSON.parse(http.responseText);
-        displayQuote(); // Display initial quote after loading
-    } else {
-        console.error('Failed to fetch quotes');
-    }
-};
-
-http.send();
+// Initial quote display
+displayQuote();
