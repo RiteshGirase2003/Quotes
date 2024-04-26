@@ -17,6 +17,7 @@ http.onload = function () {
     if (this.readyState == 4 && this.status == 200) 
     {
         quotes = JSON.parse(this.responseText);
+        console.log(" fetch - > ",quotes);
         shuffleArray(quotes);
     }
 };
@@ -30,6 +31,7 @@ function shuffleArray(array) {
 
 
 function getRandomQuote() {
+    console.log(quotes)
     return quotes[Math.floor(Math.random() * quotes.length)];
 }
 
